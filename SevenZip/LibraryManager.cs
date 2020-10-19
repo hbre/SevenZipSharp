@@ -35,10 +35,17 @@ namespace SevenZip
 
         private static string DetermineLibraryFilePath()
         {
-            if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["7zLocation"]))
-            {
-                return ConfigurationManager.AppSettings["7zLocation"];
-            }
+			try 
+			{
+            	if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["7zLocation"]))
+            	{
+            	    return ConfigurationManager.AppSettings["7zLocation"];
+	    		}
+			}			
+			catch (Exception)
+			{
+
+			}
 	
             if (string.IsNullOrEmpty(Assembly.GetExecutingAssembly().Location)) 
 	    {
