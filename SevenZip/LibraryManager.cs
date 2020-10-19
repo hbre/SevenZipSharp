@@ -35,15 +35,22 @@ namespace SevenZip
 
         private static string DetermineLibraryFilePath()
         {
-            if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["7zLocation"]))
-            {
-                return ConfigurationManager.AppSettings["7zLocation"];
-            }
+			try 
+			{
+            	if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["7zLocation"]))
+				{
+					return ConfigurationManager.AppSettings["7zLocation"];
+	    		}
+			}			
+			catch (Exception)
+			{
+
+			}
 	
             if (string.IsNullOrEmpty(Assembly.GetExecutingAssembly().Location)) 
-	    {
-		return null;
-	    }
+			{
+			return null;
+			}
 
             return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), Environment.Is64BitProcess ? "7z64.dll" : "7z.dll");
         }
